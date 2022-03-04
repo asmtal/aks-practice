@@ -1,0 +1,107 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"labels":{"kind":"web","target":"dev"},"name":"nginx-pod","namespace":"default"},"spec":{"containers":[{"image":"docker.artifactory.platform.manulife.io/nginx","name":"nginx","ports":[{"containerPort":80,"protocol":"TCP"}]}],"nodeSelector":{"kubernetes.io/os":"linux"}}}
+  creationTimestamp: "2022-02-25T02:14:39Z"
+  labels:
+    kind: web
+    target: dev
+  name: nginx-pod
+  namespace: default
+  resourceVersion: "37181"
+  uid: e9544723-b71b-449a-b841-cb6dd972d93f
+spec:
+  containers:
+  - image: docker.artifactory.platform.manulife.io/nginx
+    imagePullPolicy: Always
+    name: nginx
+    ports:
+    - containerPort: 80
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-gcbzw
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: aks-systempool-98636013-vmss000001
+  nodeSelector:
+    kubernetes.io/os: linux
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-gcbzw
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T02:14:39Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T02:14:48Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T02:14:48Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T02:14:39Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://a3c6e779379368de43c2a5d6921b8452d7a1f280fa11487e26cb32effa1366b9
+    image: docker.artifactory.platform.manulife.io/nginx:latest
+    imageID: docker.artifactory.platform.manulife.io/nginx@sha256:2834dc507516af02784808c5f48b7cbe38b8ed5d0f4837f16e78d00deb7e7767
+    lastState: {}
+    name: nginx
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T02:14:47Z"
+  hostIP: 10.236.32.19
+  phase: Running
+  podIP: 172.29.1.5
+  podIPs:
+  - ip: 172.29.1.5
+  qosClass: BestEffort
+  startTime: "2022-02-25T02:14:39Z"

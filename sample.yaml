@@ -1,0 +1,8 @@
+apiVersion: apps/v1
+kind: Pod
+metadata:
+  name: nginx-pod-with-labels
+  labels:
+    tier: web
+    target: dev
+spec:
